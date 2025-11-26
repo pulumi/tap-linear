@@ -14,6 +14,12 @@ query Issues($next: String, $replicationKeyValue: DateTimeOrDuration) {
             title
             url
             updatedAt
+            dueDate
+            state {
+                id
+                name
+                type
+            }
             creator {
                 id
                 name

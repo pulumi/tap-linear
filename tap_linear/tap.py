@@ -3,10 +3,11 @@
 from typing import List
 from singer_sdk import Tap, Stream
 from singer_sdk import typing as th
-from tap_linear.streams import IssuesStream
+from tap_linear.streams import IssuesStream, CustomerNeedsStream
 
 STREAM_TYPES = [
     IssuesStream,
+    CustomerNeedsStream,
 ]
 
 

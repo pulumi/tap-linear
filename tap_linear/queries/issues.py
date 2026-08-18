@@ -1,9 +1,10 @@
 issuesQuery = """
 query Issues($next: String, $replicationKeyValue: DateTimeOrDuration) {
     issues(
-        first: 100
+        first: 50
         after: $next
         filter: { updatedAt: {gt: $replicationKeyValue } }
+        includeArchived: true
     ) {
         pageInfo {
             hasNextPage
@@ -11,9 +12,33 @@ query Issues($next: String, $replicationKeyValue: DateTimeOrDuration) {
         }
         nodes {
             id
+            identifier
+            number
             title
+            description
             url
+            branchName
+            priority
+            priorityLabel
+            estimate
+            dueDate
+            trashed
+            customerTicketCount
+            createdAt
             updatedAt
+            startedAt
+            completedAt
+            canceledAt
+            archivedAt
+            triagedAt
+            snoozedUntilAt
+            state {
+                id
+                name
+                type
+                color
+                position
+            }
             creator {
                 id
                 name
@@ -24,13 +49,38 @@ query Issues($next: String, $replicationKeyValue: DateTimeOrDuration) {
                 name
                 email
             }
+            parent {
+                id
+                identifier
+                title
+            }
             project {
                 id
                 name
             }
-            team {
+            projectMilestone {
                 id
                 name
+                targetDate
+            }
+            team {
+                id
+                key
+                name
+            }
+            cycle {
+                id
+                number
+                name
+                startsAt
+                endsAt
+            }
+            labels {
+                nodes {
+                    id
+                    name
+                    color
+                }
             }
         }
     }

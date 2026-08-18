@@ -105,4 +105,24 @@ issuesSchema = th.PropertiesList(
             ),
         ),
     ),
+    th.Property(
+        "attachments",
+        th.ObjectType(
+            th.Property(
+                "nodes",
+                th.ArrayType(
+                    th.ObjectType(
+                        th.Property("id", th.StringType),
+                        th.Property("url", th.StringType),
+                        th.Property("title", th.StringType),
+                        th.Property("subtitle", th.StringType),
+                        th.Property("sourceType", th.StringType),
+                        th.Property("source", th.ObjectType()),
+                        th.Property("metadata", th.ObjectType()),
+                        th.Property("createdAt", th.DateTimeType),
+                    )
+                ),
+            ),
+        ),
+    ),
 ).to_dict()

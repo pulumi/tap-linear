@@ -62,4 +62,15 @@ customerNeedsSchema = th.PropertiesList(
             th.Property("email", th.StringType),
         ),
     ),
+    th.Property(
+        "attachment",
+        th.ObjectType(
+            th.Property("id", th.StringType),
+            th.Property("url", th.StringType),
+            th.Property("title", th.StringType),
+            th.Property("sourceType", th.StringType),
+            th.Property("source", th.ObjectType()),
+            th.Property("metadata", th.ObjectType()),
+        ),
+    ),
 ).to_dict()

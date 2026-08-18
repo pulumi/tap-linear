@@ -82,6 +82,18 @@ query Issues($next: String, $replicationKeyValue: DateTimeOrDuration) {
                     color
                 }
             }
+            attachments {
+                nodes {
+                    id
+                    url
+                    title
+                    subtitle
+                    sourceType
+                    source
+                    metadata
+                    createdAt
+                }
+            }
         }
     }
 }

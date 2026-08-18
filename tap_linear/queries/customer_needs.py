@@ -51,6 +51,14 @@ query CustomerNeeds($next: String, $replicationKeyValue: DateTimeOrDuration) {
                 name
                 email
             }
+            attachment {
+                id
+                url
+                title
+                sourceType
+                source
+                metadata
+            }
         }
     }
 }

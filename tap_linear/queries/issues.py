@@ -32,6 +32,11 @@ query Issues($next: String, $replicationKeyValue: DateTimeOrDuration) {
             archivedAt
             triagedAt
             snoozedUntilAt
+            slaStartedAt
+            slaBreachesAt
+            slaMediumRiskAt
+            slaHighRiskAt
+            slaType
             state {
                 id
                 name

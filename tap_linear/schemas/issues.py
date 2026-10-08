@@ -23,6 +23,13 @@ issuesSchema = th.PropertiesList(
     th.Property("archivedAt", th.DateTimeType),
     th.Property("triagedAt", th.DateTimeType),
     th.Property("snoozedUntilAt", th.DateTimeType),
+    # SLA fields (Linear issue SLA/SLO). slaType is the SLADayCountType enum
+    # ("all" | "onlyBusinessDays"); the rest are the SLA lifecycle timestamps.
+    th.Property("slaStartedAt", th.DateTimeType),
+    th.Property("slaBreachesAt", th.DateTimeType),
+    th.Property("slaMediumRiskAt", th.DateTimeType),
+    th.Property("slaHighRiskAt", th.DateTimeType),
+    th.Property("slaType", th.StringType),
     th.Property(
         "state",
         th.ObjectType(

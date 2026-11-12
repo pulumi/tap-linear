@@ -10,6 +10,10 @@ from singer_sdk.streams import GraphQLStream
 class LinearStream(GraphQLStream):
     """Linear stream class."""
 
+    # Name of the top-level connection field in the GraphQL response
+    # (e.g. "issues" for `data.issues.nodes`). Set per stream.
+    connection_field: str = "issues"
+
     @property
     def authenticator(self) -> APIKeyAuthenticator:
         return APIKeyAuthenticator.create_for_stream(
@@ -36,8 +40,9 @@ class LinearStream(GraphQLStream):
     ) -> Any:
         """Return the next page token."""
         resp_json = response.json()
-        if resp_json["data"]["issues"]["pageInfo"]["hasNextPage"]:
-            return resp_json["data"]["issues"]["pageInfo"]["endCursor"]
+        page_info = resp_json["data"][self.connection_field]["pageInfo"]
+        if page_info["hasNextPage"]:
+            return page_info["endCursor"]
         else:
             return None
 
@@ -58,5 +63,5 @@ class LinearStream(GraphQLStream):
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
         """Parse the response and return an iterator of result rows."""
         resp_json = response.json()
-        for row in resp_json["data"]["issues"]["nodes"]:
+        for row in resp_json["data"][self.connection_field]["nodes"]:
             yield row
